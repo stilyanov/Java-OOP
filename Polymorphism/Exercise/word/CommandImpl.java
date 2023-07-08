@@ -42,7 +42,7 @@ public class CommandImpl implements CommandInterface {
 
         commands.add(new Command("uppercase", toUpperTransform));
         commands.add(new Command("cut", cutTransform));
-        commands.add(new Command("paster", pasteTransform));
+        commands.add(new Command("paste", pasteTransform));
 
         return commands;
     }
