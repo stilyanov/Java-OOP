@@ -85,10 +85,19 @@ public class ControllerImpl implements Controller {
     @Override
     public String report() {
         int size = (int) presentRepository.getModels().stream().filter(Present::isDone).count();
-        List<String> collect = helperRepository.getModels().stream().map(helper -> String.format("Name: %s%n" +
-                        "Energy: %d%n" +
-                        "Instruments: %d not broken left%n", helper.getName(), helper.getEnergy(),
-                (int) helper.getInstruments().stream().filter(instrument -> !instrument.isBroken()).count())).collect(Collectors.toList());
-        return String.format("%d presents are done!%n", size) + String.format("Helpers info:%n") + String.join("", collect).trim();
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("%d presents are done!", size)).append(System.lineSeparator());
+        sb.append("Helpers info:").append(System.lineSeparator());
+        for (Helper helper : this.helperRepository.getModels()) {
+            sb.append(String.format("Name: %s", helper.getName())).append(System.lineSeparator());
+            sb.append(String.format("Energy: %d", helper.getEnergy())).append(System.lineSeparator());
+            sb.append(String.format("Instruments: %d not broken left",
+                            helper.getInstruments().stream().filter(e -> !e.isBroken()).collect(Collectors.toList()).size()))
+                    .append(System.lineSeparator());
+        }
+
+        return sb.toString().trim();
     }
 }

@@ -28,17 +28,12 @@ public abstract class BaseHelper implements Helper {
         this.energy = energy;
     }
 
-    private void setInstruments(Collection<Instrument> instruments) {
-        this.instruments = instruments;
-    }
-
     @Override
     public void work() {
-        int decreasedEnergy = this.getEnergy() - 10;
-        if (decreasedEnergy < 0) {
-            decreasedEnergy = 0;
+        this.energy -= 10;
+        if (this.energy < 0) {
+            this.energy = 0;
         }
-        this.setEnergy(decreasedEnergy);
     }
 
     @Override
