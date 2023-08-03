@@ -2,36 +2,38 @@ package goldDigger.repositories;
 
 import goldDigger.models.spot.Spot;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class SpotRepository implements Repository<Spot> {
 
-    private Map<String, Spot> spots;
+    private Collection<Spot> spots;
 
     public SpotRepository() {
-        this.spots = new LinkedHashMap<>();
+        this.spots = new ArrayList<>();
     }
 
     @Override
     public Collection<Spot> getCollection() {
-        return Collections.unmodifiableCollection(spots.values());
+        return Collections.unmodifiableCollection(this.spots);
     }
 
     @Override
     public void add(Spot spot) {
-        spots.put(spot.getName(), spot);
+        this.spots.add(spot);
     }
 
     @Override
     public boolean remove(Spot spot) {
-        return spots.remove(spot) != null;
+        return this.spots.remove(spot);
     }
 
     @Override
     public Spot byName(String name) {
-        return spots.get(name);
+        return this.spots.stream()
+                .filter(spot -> spot.getName().equals(name))
+                .findFirst()
+                .orElse(null);
     }
 }

@@ -2,7 +2,7 @@ package goldDigger.models.museum;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 
 public class BaseMuseum implements Museum {
 
@@ -14,6 +14,6 @@ public class BaseMuseum implements Museum {
 
     @Override
     public Collection<String> getExhibits() {
-        return Collections.unmodifiableCollection(exhibits);
+        return this.exhibits;
     }
 }
