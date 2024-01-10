@@ -1,1 +1,1 @@
-# This is a repository where i will upload my tasks from the course Java OOP from SoftUni
+This is a repository with exercises from SoftUni Java OOP - June 2023 course.
